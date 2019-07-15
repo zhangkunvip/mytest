@@ -19,6 +19,7 @@ public class JoinThread extends Thread {
      * {@code "Thread-"+}<i>n</i>, where <i>n</i> is an integer.
      */
     public JoinThread(String name) {
+        super();
         this.name = name;
     }
 
