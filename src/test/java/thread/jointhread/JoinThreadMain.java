@@ -1,4 +1,4 @@
-package thread;
+package thread.jointhread;
 
 /**
  * PROJECT_name: github
