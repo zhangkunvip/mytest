@@ -17,11 +17,11 @@ public class StartVerticle extends AbstractVerticle {
 
 
         // 部署发布服务
-        vertx.deployVerticle("com.example.demo.RestfulVerticle");
-        vertx.deployVerticle("com.example.demo.EventBusConsumer1");
-        vertx.deployVerticle("com.example.demo.EventBusConsumer2");
+        vertx.deployVerticle("vertx.demo.RestfulVerticle");
+        vertx.deployVerticle("vertx.demo.EventBusConsumer1");
+        vertx.deployVerticle("vertx.demo.EventBusConsumer2");
 
-        vertx.deployVerticle("com.example.demo.BlockVerticle");
+        vertx.deployVerticle("vertx.demo.BlockVerticle");
 
 
         try {
