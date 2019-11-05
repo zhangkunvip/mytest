@@ -1,7 +1,7 @@
-package controller;
+package com.test.controller;
 
-import config.GitAutoRefreshConfig;
-import config.GitConfig;
+import com.test.config.GitAutoRefreshConfig;
+import com.test.config.GitConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

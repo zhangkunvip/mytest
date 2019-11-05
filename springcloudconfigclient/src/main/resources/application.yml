@@ -1,5 +1,6 @@
 server:
   port: 3302
+
 management:
   endpoint:
     shutdown:
@@ -14,3 +15,4 @@ data:
   user:
     username: ususer
     password: papass
+debug: true
