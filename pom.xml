@@ -11,7 +11,7 @@
     <modules>
         <module>boot-base</module>
         <module>zaxiang</module>
-<!--        <module>springcloudconfig</module>-->
-<!--        <module>springcloudconfigclient</module>-->
+        <module>springcloudconfig</module>
+        <module>springcloudconfigclient</module>
     </modules>
 </project>

@@ -15,4 +15,4 @@ data:
   user:
     username: ususer
     password: papass
-debug: true
+#debug: true
