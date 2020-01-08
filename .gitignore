@@ -1,0 +1,4 @@
+/zaxiang/target/*
+/springcloudconfig/target/*
+/springcloudconfigclient/target/*
+/classes/production/*
