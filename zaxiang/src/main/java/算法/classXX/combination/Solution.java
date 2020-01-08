@@ -1,4 +1,4 @@
-package com.mahai.combination;
+package 算法.classXX.combination;
 
 
 public class Solution {

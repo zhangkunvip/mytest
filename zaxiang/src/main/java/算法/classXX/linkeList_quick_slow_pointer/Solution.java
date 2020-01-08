@@ -1,4 +1,4 @@
-package com.mahai.linkeList_quick_slow_pointer;
+package 算法.classXX.linkeList_quick_slow_pointer;
 
 
 import java.util.ArrayList;
