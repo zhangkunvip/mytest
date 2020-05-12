@@ -1,4 +1,9 @@
+.idea/
+/.idea/*.*
 /zaxiang/target/*
 /springcloudconfig/target/*
 /springcloudconfigclient/target/*
 /classes/production/*
+springcloudconfig/src/test/
+springcloudconfigclient/src/test/
+*.iml
