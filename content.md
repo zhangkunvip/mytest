@@ -2,6 +2,8 @@
 ##
 > <a href="https://blog.csdn.net/qq_44377709/article/details/105993577" target="_blank">无锁、偏向锁、轻量级锁、重量级锁，完整的锁升级！</a>
 
+> <a href="http://mp.weixin.qq.com/s?__biz=MzIxNjA5MTM2MA==&mid=2652435146&idx=2&sn=fd72622e7152f0b7d0c9d91290b3aac6" target="_blank">Java7/8 中的HashMap 和 ConcurrentHashMap</a>
+
 > <a href="http://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&mid=2650139864&idx=1&sn=d78c1d113d332d98b612dc1d95913531" target="_blank">《Java开发手册》解读：大整数传输为何禁用Long类型? </a>
 - 双精度分配了8个字节，总共64位，从左至右划分是1位符号、11位指数、52位有效数字。如下图所示，以0.7为例，展示了双精度浮点数的存储方式。
 ![alt text](image\微信截图_20200817140248.png "双精度浮点数的存储方式")
@@ -30,6 +32,11 @@
     - 虚引用（PhantomReference）
 
         虚引用与前面的几种都不一样，这种引用类型不会影响对象的生命周期，所持有的引用就跟没持有一样，随时都能被GC回收。需要注意的是，在使用虚引用时，必须和引用队列关联使用。在对象的垃圾回收过程中，如果GC发现一个对象还存在虚引用，则会把这个虚引用加入到与之关联的引用队列中。程序可以通过判断引用队列中是否已经加入了虚引用，来了解被引用的对象是否将要被垃圾回收。如果程序发现某个虚引用已经被加入到引用队列，那么就可以在所引用的对象内存被回收之前采取必要的行动防止被回收。虚引用主要用来跟踪对象被垃圾回收器回收的活动。
+
+- 实现 Runnable 接口和继承 Thread 类哪种方式更好?
+    - 从代码架构角度。（应该去解耦，两件事情：1.具体的任务即 run 方法中的内容；2.和线程生命周期相关的如创建线程、运行线程、销毁线程即 Thread 类去做的事情）
+    - 新建线程的损耗的角度。（继承 Thread 类，需要新建线程、执行完之后还要销毁，实现 Runnable 接口的方式可以反复的利用同一个线程，比如线程池就是这么做的，用于线程生命周期的损耗就减少了）
+    - Java 不支持多继承的角度。（对于扩展性而言）
 
 ##JVM
 <a href="http://mp.weixin.qq.com/s?__biz=MzIxNjA5MTM2MA==&mid=2652439158&idx=2&sn=13b7bb8bb9d491775bd5d50ec895944a" target="_blank">别再说自己不会JVM了，看完这篇能和面试官扯上半小时</a>
@@ -73,6 +80,9 @@
   - 对象终结
     
     对象的构造函数执行结束先于 finalize() 方法。
+
+## trim移除的空白字符指的是指ASCII值小于或等于32的任何字符(' U+0020 ')：
+![alt text](image\微信图片_20201008165746.jpg "双精度浮点数的存储方式")
 
 ----
 #SPRING
@@ -146,6 +156,8 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 - 三、客户端使用
 - 四、相关工具
 - 五、删除bigkey
+
+<a href="http://mp.weixin.qq.com/s?__biz=Mzg3MjA4MTExMw==&mid=2247494452&idx=1&sn=cb01a4bedd639f1b0679d4b18f60948c" target="_blank">Redis延时队列，这次彻底给你整明白了</a>
 
 <a href="https://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247491843&idx=2&sn=816871265811b80b52d2073ec604317b" target="_blank">数据库系统设计概述</a>
 ####内存淘汰
@@ -269,11 +281,26 @@ Redis为了实现近似LRU算法，给每个key增加了一个额外增加了一
 ###binlog
 <a href="https://developer.aliyun.com/article/770659?utm_content=g_1000172574" target="_blank">详细讲解！Canal+Kafka实现MySQL与Redis数据同步！</a>
 
+###日志
 
+####日志分类
+<a href="https://www.cnblogs.com/wy123/p/8365234.html" target="_blank">MySQL到底有几种日志类型需要我们记住？</a>
+- 重做日志（redo log）
+- 回滚日志（undo log）
+- 二进制日志（binlog）
+- 错误日志（errorlog）
+- 慢查询日志（slow query log）
+- 一般查询日志（general log）
+- 中继日志（relay log）
+<a href="https://blog.csdn.net/mshxuyi/article/details/100652769" target="_blank">MySQL 中继日志</a>
 
 ----
 
 #ES
+<a href="https://www.jianshu.com/p/28fb017be7a7" target="_blank">Elasticsearch详解</a>
+
+<a href="https://www.jianshu.com/p/8e22558dc8a1" target="_blank">Elasticsearch详解-续</a>
+
 
 ----
 #MQ
@@ -392,6 +419,10 @@ Redis为了实现近似LRU算法，给每个key增加了一个额外增加了一
 
 ##flink
 
+##clickhouse
+<a href="http://mp.weixin.qq.com/s?__biz=MzI3MjUxNzkxMw==&mid=2247485984&idx=2&sn=8fabf1a3f7eb6b59062f28e343d2f65c" target="_blank">ClickHouse到底是什么？凭啥这么牛逼！</a>
+
+
 
 
 <a href="https://blog.csdn.net/baichoufei90/article/details/84328666" target="_blank">MPP架构</a>
@@ -451,6 +482,24 @@ Redis为了实现近似LRU算法，给每个key增加了一个额外增加了一
 - <a href="http://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247492653&idx=2&sn=b029eb7d33708abcca0640ab741b02d7" target="_blank">40张图揭秘，「键入网址发生了什么」 ，http,tcp</a>
 - <a href="http://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247493143&idx=1&sn=b4be69be1d29920f1b19b03b47433e94" target="_blank">64 张图带你 Maven 实战通关</a>
 - <a href="http://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247499652&idx=1&sn=f8ce3697f4c3ea1573fabe456535885d" target="_blank">源码解析：Git的第一个提交是什么样的？</a>
+- <a href="http://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247499892&idx=1&sn=0513bd832d82f213ffd01f3a071566e6" target="_blank">如何写好单元测试？</a>
+#### 设计原则（S.O.L.I.D）：
+- 1、SRP 单一职责原则
+- 2、OCP 开闭原则
+- 3、LSP 里式替换原则
+- 4、ISP 接口隔离原则
+- 5、DIP 依赖倒置原则
+#### DRY 原则、KISS 原则、YAGNI 原则、LOD 法则:
+-  DRY：不要干重复的事儿。
+-  KISS：不要干复杂的事儿，思从深而行从简。
+-  YAGNI：不要干不需要的事儿，尺度把握尤为重要，超越尺度则会有过度设计之嫌。
+-  LOD：最小依赖。
+####   覆盖率准则
+- 函式覆盖率（Function coverage）：有呼叫到程式中的每一个函式（或副程式）吗？
+- 指令覆盖率（Statement coverage）：若用控制流图（英语：control flow graph）表示程式，有执行到控制流图中的每一个节点吗？
+- 判断覆盖率（Decision coverage）：（和分支覆盖率不同）若用控制流图表示程式，有执行到控制流图中的每一个边吗？例如控制结构中所有IF指令都有执行到逻辑运算式成立及不成立的情形吗？
+- 条件覆盖率（Condition coverage）：也称为谓词覆盖（predicate coverage），每一个逻辑运算式中的每一个条件（无法再分解的逻辑运算式）是否都有执行到成立及不成立的情形吗？条件覆盖率成立不表示判断覆盖率一定成立。
+- 条件/判断覆盖率（Condition/decision coverage）：需同时满足判断覆盖率和条件覆盖率。
 
 
 
