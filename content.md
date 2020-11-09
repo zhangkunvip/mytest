@@ -483,6 +483,7 @@ Redis为了实现近似LRU算法，给每个key增加了一个额外增加了一
 - <a href="http://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247493143&idx=1&sn=b4be69be1d29920f1b19b03b47433e94" target="_blank">64 张图带你 Maven 实战通关</a>
 - <a href="http://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247499652&idx=1&sn=f8ce3697f4c3ea1573fabe456535885d" target="_blank">源码解析：Git的第一个提交是什么样的？</a>
 - <a href="http://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247499892&idx=1&sn=0513bd832d82f213ffd01f3a071566e6" target="_blank">如何写好单元测试？</a>
+- <a href="https://blog.csdn.net/lc130628/article/details/82114220" target="_blank">大B和小b的区别及关联</a>
 #### 设计原则（S.O.L.I.D）：
 - 1、SRP 单一职责原则
 - 2、OCP 开闭原则
