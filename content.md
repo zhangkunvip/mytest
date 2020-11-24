@@ -14,11 +14,11 @@
   - 四问：如果不幸中招，服务端正在使用Long类型作为大整数的返回，有哪些办法解决？
 
 ##多线程
-<a href="https://blog.csdn.net/qq_42175986/article/details/107980811" target="_blank">敞开心扉，一起聊聊Java多线程</a>
+> <a href="https://blog.csdn.net/qq_42175986/article/details/107980811" target="_blank">敞开心扉，一起聊聊Java多线程</a>
 
-<a href="http://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247492647&idx=1&sn=4d85bc69e46ba7ab67972348577b8e78" target="_blank">2w字 + 40张图带你参透并发编程！</a>
+> <a href="http://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247492647&idx=1&sn=4d85bc69e46ba7ab67972348577b8e78" target="_blank">2w字 + 40张图带你参透并发编程！</a>
 
-<a href="https://blog.csdn.net/qq_35634181/article/details/103996977" target="_blank">深入理解ThreadLocal的原理及内存泄漏问题</a>
+> <a href="https://blog.csdn.net/qq_35634181/article/details/103996977" target="_blank">深入理解ThreadLocal的原理及内存泄漏问题</a>
 - StrongRerence为JVM内部实现。其他三类引用类型全部继承自Reference父类。
     - 强引用（StrongReference）
         
@@ -38,10 +38,17 @@
     - 新建线程的损耗的角度。（继承 Thread 类，需要新建线程、执行完之后还要销毁，实现 Runnable 接口的方式可以反复的利用同一个线程，比如线程池就是这么做的，用于线程生命周期的损耗就减少了）
     - Java 不支持多继承的角度。（对于扩展性而言）
 
-##JVM
-<a href="http://mp.weixin.qq.com/s?__biz=MzIxNjA5MTM2MA==&mid=2652439158&idx=2&sn=13b7bb8bb9d491775bd5d50ec895944a" target="_blank">别再说自己不会JVM了，看完这篇能和面试官扯上半小时</a>
+> <a href="https://mp.weixin.qq.com/s/_OnEZ9tuDsOKBnSKmGoWKA" target="_blank">【高并发】面试官：讲讲高并发场景下如何优化加锁方式？</a>
+> 通俗的说，通过synchronized加锁的对象，通过wait方法进入队列，notify进行出队，notifyall全部出队。
+- 我们使用synchronized加锁时，只允许一个线程进入synchronized保护的代码块，也就是临界区。如果一个线程进入了临界区，则其他的线程会进入阻塞队列里等待，这个阻塞队列和synchronized互斥锁是一对一的关系，也就是说，一把互斥锁对应着一个独立的阻塞队列。
+  
+  在并发编程中，如果一个线程获得了synchronized互斥锁，但是不满足继续向下执行的条件，则需要进入等待状态。此时，可以使用Java中的wait()方法来实现。当调用wait()方法后，当前线程就会被阻塞，并且会进入一个等待队列中进行等待，这个由于调用wait()方法而进入的等待队列也是互斥锁的等待队列。而且，线程在进入等待队列的同时，会释放自身获得的互斥锁，这样，其他线程就有机会获得互斥锁，进而进入临界区了。整个过程可以表示成下图所示。
 
-<a href="https://www.cnblogs.com/xdecode/p/8948277.html" target="_blank">Java内存模型与指令重排</a>
+
+##JVM
+> <a href="http://mp.weixin.qq.com/s?__biz=MzIxNjA5MTM2MA==&mid=2652439158&idx=2&sn=13b7bb8bb9d491775bd5d50ec895944a" target="_blank">别再说自己不会JVM了，看完这篇能和面试官扯上半小时</a>
+
+> <a href="https://www.cnblogs.com/xdecode/p/8948277.html" target="_blank">Java内存模型与指令重排</a>
 - 原子性；
 - 有序性；
 - 可见性；
@@ -87,7 +94,7 @@
 ----
 #SPRING
 ##spring基础
-<a href="http://mp.weixin.qq.com/s?__biz=MzUxNDA1NDI3OA==&mid=2247485475&idx=1&sn=bf60a8064835a71a512d6fe993d80dbc" target="_blank">Spring基础！</a>
+> <a href="http://mp.weixin.qq.com/s?__biz=MzUxNDA1NDI3OA==&mid=2247485475&idx=1&sn=bf60a8064835a71a512d6fe993d80dbc" target="_blank">Spring基础！</a>
 
         Spring Core：核心类库，提供IOC服务；
         Spring Context：提供框架式的Bean访问方式，以及企业级功能（JNDI、定时任务等）；
@@ -106,12 +113,15 @@
         ①JDK动态代理只提供接口的代理，不支持类的代理。核心InvocationHandler接口和Proxy类，InvocationHandler 通过invoke()方法反射来调用目标类中的代码，动态地将横切逻辑和业务编织在一起；接着，Proxy利用 InvocationHandler动态创建一个符合某一接口的的实例,  生成目标类的代理对象。
         ②如果代理类没有实现 InvocationHandler 接口，那么Spring AOP会选择使用CGLIB来动态代理目标类。CGLIB（Code Generation Library），是一个代码生成的类库，可以在运行时动态的生成指定类的一个子类对象，并覆盖其中特定方法并添加增强代码，从而实现AOP。CGLIB是通过继承的方式做的动态代理，因此如果某个类被标记为final，那么它是无法使用CGLIB做动态代理的。
   - （3）静态代理与动态代理区别在于生成AOP代理对象的时机不同，相对来说AspectJ的静态代理方式具有更好的性能，但是AspectJ需要特定的编译器进行处理，而Spring AOP则无需特定的编译器处理。
+
+> <a href="https://mp.weixin.qq.com/s/VUQ4HOqoZ78l0V4u5MTvSA" target="_blank">写了个牛逼的日志切面，甩锅更方便了！</a>
+
 - 4、Spring的IoC理解：
   - Spring的IOC有三种注入方式 ：构造器注入、setter方法注入、根据注解注入。        
-        
+
         
 ##spring-boot
-<a href="https://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247491617&idx=1&sn=160680769e5e0a8c8200d252527f8bdc" target="_blank">最棒 Spring Boot 干货总结 ！</a>
+> <a href="https://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247491617&idx=1&sn=160680769e5e0a8c8200d252527f8bdc" target="_blank">最棒 Spring Boot 干货总结 ！</a>
 
 IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 - 一、抛砖引玉：探索Spring IoC容器
@@ -121,17 +131,17 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 - 五、出神入化：揭秘自动配置原理
 - 六、启动引导：Spring Boot应用启动的秘密
 
-<a href="http://mp.weixin.qq.com/s?__biz=Mzg3MjA4MTExMw==&mid=2247493155&idx=2&sn=0f94719e6ed2dc88e15afbc8001344f2" target="_blank">Spring Cloud Feign 自定义配置(重试、拦截与错误码处理) 实践</a>
+> <a href="http://mp.weixin.qq.com/s?__biz=Mzg3MjA4MTExMw==&mid=2247493155&idx=2&sn=0f94719e6ed2dc88e15afbc8001344f2" target="_blank">Spring Cloud Feign 自定义配置(重试、拦截与错误码处理) 实践</a>
 
 ----
 #RPC
-<a href="https://blog.csdn.net/mindfloating/article/details/39473807" target="_blank">深入浅出 RPC - 浅出篇</a>
+> <a href="https://blog.csdn.net/mindfloating/article/details/39473807" target="_blank">深入浅出 RPC - 浅出篇</a>
 
-<a href="https://blog.csdn.net/mindfloating/article/details/39474123" target="_blank">深入浅出 RPC - 深入篇</a>
+> <a href="https://blog.csdn.net/mindfloating/article/details/39474123" target="_blank">深入浅出 RPC - 深入篇</a>
 
 ![alt text](image\dubbo-extension.jpg "dubbo-extension")
 ![alt text](image\dubboFrameWork.png "dubboFrameWork")
-<a href="http://mp.weixin.qq.com/s?__biz=MzUxNDA1NDI3OA==&mid=2247485488&idx=1&sn=1c47b24be47c0119689f9150255ff0a4" target="_blank">基于 Netty 手写 RPC</a>
+> <a href="http://mp.weixin.qq.com/s?__biz=MzUxNDA1NDI3OA==&mid=2247485488&idx=1&sn=1c47b24be47c0119689f9150255ff0a4" target="_blank">基于 Netty 手写 RPC</a>
 
 
 
@@ -139,7 +149,7 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 #CACHE
 ##memcache
 
-<a href="http://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651962373&idx=1&sn=7bb5925b94ea1240abcf89e2e5f89916" target="_blank">memcache内核，一文搞定！面试再也不怕了！！！（值得收藏）</a>
+> <a href="http://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651962373&idx=1&sn=7bb5925b94ea1240abcf89e2e5f89916" target="_blank">memcache内核，一文搞定！面试再也不怕了！！！（值得收藏）</a>
 - （1）mc的核心职能是KV内存管理，value存储最大为1M，它不支持复杂数据结构（哈希、列表、集合、有序集合等）；
 - （2）mc不支持持久化；
 - （3）mc支持key过期；
@@ -148,7 +158,7 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 
 ##redis
 ###Redis的内存淘汰策略问题 
-<a href="https://mp.weixin.qq.com/s?__biz=Mzg3MjA4MTExMw==&mid=2247493297&idx=1&sn=5ef9b81682e26381dfc0a4fae84782b6" target="_blank">阿里巴巴官方最新Redis开发规范！</a>
+> <a href="https://mp.weixin.qq.com/s?__biz=Mzg3MjA4MTExMw==&mid=2247493297&idx=1&sn=5ef9b81682e26381dfc0a4fae84782b6" target="_blank">阿里巴巴官方最新Redis开发规范！</a>
 - 一、键值设计
     - 1、key名设计
     - 2、value设计
@@ -157,9 +167,9 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 - 四、相关工具
 - 五、删除bigkey
 
-<a href="http://mp.weixin.qq.com/s?__biz=Mzg3MjA4MTExMw==&mid=2247494452&idx=1&sn=cb01a4bedd639f1b0679d4b18f60948c" target="_blank">Redis延时队列，这次彻底给你整明白了</a>
+> <a href="http://mp.weixin.qq.com/s?__biz=Mzg3MjA4MTExMw==&mid=2247494452&idx=1&sn=cb01a4bedd639f1b0679d4b18f60948c" target="_blank">Redis延时队列，这次彻底给你整明白了</a>
 
-<a href="https://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247491843&idx=2&sn=816871265811b80b52d2073ec604317b" target="_blank">数据库系统设计概述</a>
+> <a href="https://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247491843&idx=2&sn=816871265811b80b52d2073ec604317b" target="_blank">数据库系统设计概述</a>
 ####内存淘汰
 
         chunk：它是将内存分配给用户使用的最小单元。
@@ -181,7 +191,7 @@ Redis为了实现近似LRU算法，给每个key增加了一个额外增加了一
 - 3.LRU算法的对比 我们可以通过一个实验对比各LRU算法的准确率，先往Redis里面添加一定数量的数据n，使Redis可用内存用完，再往Redis里面添加n/2的新数据，这个时候就需要淘汰掉一部分的数据，如果按照严格的LRU算法，应该淘汰掉的是最先加入的n/2的数据。生成如下各LRU算法的对比图
 
 
-<a href="http://mp.weixin.qq.com/s?__biz=MzUxNDA1NDI3OA==&mid=2247487799&idx=1&sn=be29031f4021c4887b8e766a18f9ffd1" target="_blank">这5个常问的Redis面试题</a>
+> <a href="http://mp.weixin.qq.com/s?__biz=MzUxNDA1NDI3OA==&mid=2247487799&idx=1&sn=be29031f4021c4887b8e766a18f9ffd1" target="_blank">这5个常问的Redis面试题</a>
 - redis 集群模式的工作原理能说一下么？在集群模式下， redis 的 key 是如何寻址的？分布式寻址都有哪些算法？了解一致性 hash 算法吗？
 - 了解什么是 redis 的雪崩、穿透和击穿？redis 崩溃之后会 怎么样？系统该如何应对这种情况？如何处理 redis 的穿透？
 - 如何保证缓存与数据库的双写一致性？
@@ -264,7 +274,7 @@ Redis为了实现近似LRU算法，给每个key增加了一个额外增加了一
 ![alt text](image\MVCC.jpg "MVCC")
 
 ###索引
-<a href="http://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247492581&idx=2&sn=3c162c7fabb046190ee0f23ca391e135" target="_blank">微信大牛教你深入了解数据库索引</a>
+> <a href="http://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247492581&idx=2&sn=3c162c7fabb046190ee0f23ca391e135" target="_blank">微信大牛教你深入了解数据库索引</a>
 - 线性索引
     - 稠密索引
     
@@ -279,12 +289,12 @@ Redis为了实现近似LRU算法，给每个key增加了一个额外增加了一
 - 多级索引【B-/B+树索引】
 
 ###binlog
-<a href="https://developer.aliyun.com/article/770659?utm_content=g_1000172574" target="_blank">详细讲解！Canal+Kafka实现MySQL与Redis数据同步！</a>
+> <a href="https://developer.aliyun.com/article/770659?utm_content=g_1000172574" target="_blank">详细讲解！Canal+Kafka实现MySQL与Redis数据同步！</a>
 
 ###日志
 
 ####日志分类
-<a href="https://www.cnblogs.com/wy123/p/8365234.html" target="_blank">MySQL到底有几种日志类型需要我们记住？</a>
+> <a href="https://www.cnblogs.com/wy123/p/8365234.html" target="_blank">MySQL到底有几种日志类型需要我们记住？</a>
 - 重做日志（redo log）
 - 回滚日志（undo log）
 - 二进制日志（binlog）
@@ -292,22 +302,29 @@ Redis为了实现近似LRU算法，给每个key增加了一个额外增加了一
 - 慢查询日志（slow query log）
 - 一般查询日志（general log）
 - 中继日志（relay log）
-<a href="https://blog.csdn.net/mshxuyi/article/details/100652769" target="_blank">MySQL 中继日志</a>
+> <a href="https://blog.csdn.net/mshxuyi/article/details/100652769" target="_blank">MySQL 中继日志</a>
 
 ----
 
 #ES
-<a href="https://www.jianshu.com/p/28fb017be7a7" target="_blank">Elasticsearch详解</a>
+> <a href="https://www.jianshu.com/p/28fb017be7a7" target="_blank">Elasticsearch详解</a>
 
-<a href="https://www.jianshu.com/p/8e22558dc8a1" target="_blank">Elasticsearch详解-续</a>
+> <a href="https://www.jianshu.com/p/8e22558dc8a1" target="_blank">Elasticsearch详解-续</a>
 
 
 ----
 #MQ
-
+##MQ，究竟如何保证消息幂等？
+- 首先，上半场幂等。
+MQ-client生成inner-msg-id，保证上半场幂等。
+这个ID全局唯一，业务无关，由MQ保证。
+ 
+- 然后，下半场幂等。
+业务发送方带入biz-id，业务接收方去重保证幂等。
+这个ID对单业务唯一，业务相关，对MQ透明。
 ##rabbitMq
 ###RabbitMQ 七战 Kafka，差异立现
-<a href="http://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247491130&idx=1&sn=a3348f22be3a85211154d2f27b3d5bb8" target="_blank">RabbitMQ 七战 Kafka，差异立现 </a>
+> <a href="http://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247491130&idx=1&sn=a3348f22be3a85211154d2f27b3d5bb8" target="_blank">RabbitMQ 七战 Kafka，差异立现 </a>
 - 什么时候使用RabbitMQ以及什么时候使用Kafka？
 
         优先选择RabbitMQ的条件：
@@ -332,7 +349,7 @@ Redis为了实现近似LRU算法，给每个key增加了一个额外增加了一
 
 
 ###RabbitMQ之交换机的四种类型和属性
-<a href="http://mp.weixin.qq.com/s?__biz=Mzg3MjA4MTExMw==&mid=2247492996&idx=2&sn=55db10f5df239d07a69672b29f5b68bd" target="_blank">springboot + rabbitmq 用了消息确认机制，感觉掉坑里了</a>
+> <a href="http://mp.weixin.qq.com/s?__biz=Mzg3MjA4MTExMw==&mid=2247492996&idx=2&sn=55db10f5df239d07a69672b29f5b68bd" target="_blank">springboot + rabbitmq 用了消息确认机制，感觉掉坑里了</a>
 #### 消息发送确认：
 - 1、 ConfirmCallback确认模式
 - 2、 ReturnCallback 退回模式
@@ -341,7 +358,7 @@ Redis为了实现近似LRU算法，给每个key增加了一个额外增加了一
 - 2、basicNack
 - 3、basicReject
 
-<a href="https://blog.csdn.net/hry2015/article/details/79118804" target="_blank">RabbitMQ之交换机的四种类型和属性</a> 
+> <a href="https://blog.csdn.net/hry2015/article/details/79118804" target="_blank">RabbitMQ之交换机的四种类型和属性</a> 
 #### 交换机主要包括如下4种类型：
 - Direct exchange（直连交换机）
 - Fanout exchange（扇型交换机）
@@ -351,12 +368,23 @@ Redis为了实现近似LRU算法，给每个key增加了一个额外增加了一
 - 临时（ephemeral）订阅，这种订阅只有在消费者启动并且运行的时候才存在。一旦消费者退出，相应的订阅以及尚未处理的消息就会丢失。
 - 持久（durable）订阅，这种订阅会一直存在，除非主动去删除。消费者退出后，消息系统会继续维护该订阅，并且后续消息可以被继续处理。
 
-<a href="http://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&mid=2650141257&idx=3&sn=0539c85d6fd5c392639610457f0d170c" target="_blank">给你1分钟，回答下RabbitMQ如何保证消息不丢？</a>
+> <a href="http://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&mid=2650141257&idx=3&sn=0539c85d6fd5c392639610457f0d170c" target="_blank">给你1分钟，回答下RabbitMQ如何保证消息不丢？</a>
 - 如何保证消息的可靠性？
 
         发送方采取发送者确认模式
         MQ进行队列及消息的持久化
         消费者消费成功后手动确认消息
+### 什么是死信队列
+> <a href="https://mp.weixin.qq.com/s/_AXWy5XdYf_6OBf2VhvJGg" target="_blank">RabbitMQ之什么是死信队列</a>
+
+
+- 当一条消息在队列中出现以下三种情况的时候，该消息就会变成一条死信。
+    
+        消息被拒绝(basic.reject / basic.nack)，并且requeue = false
+        消息TTL过期
+        队列达到最大长度
+- 当消息在一个队列中变成一个死信之后，如果配置了死信队列，它将被重新publish到死信交换机，死信交换机将死信投递到一个队列上，这个队列就是死信队列。
+
 
 ----
 #BIGDATA
@@ -412,6 +440,7 @@ Redis为了实现近似LRU算法，给每个key增加了一个额外增加了一
        0: producer不会等待broker发送ack。生产者只要把消息发送给broker之后，就认为发送成功了，这是第1种情况；
        1: 当leader接收到消息之后发送ack。生产者把消息发送到broker之后，并且消息被写入到本地文件，才认为发送成功，这是第2种情况；
        -1: 当所有的follower都同步消息成功后发送ack。不仅是主的分区将消息保存成功了，而且其所有的分区的副本数也都同步好了，才会被认为发动成功，这是第3种情况。
+> <a href="https://blog.csdn.net/lukabruce/article/details/101012815" target="_blank">关于kafka中ISR、AR、HW、LEO、LSO、LW的含义详解</a>
 
 ##spark
 
@@ -420,23 +449,23 @@ Redis为了实现近似LRU算法，给每个key增加了一个额外增加了一
 ##flink
 
 ##clickhouse
-<a href="http://mp.weixin.qq.com/s?__biz=MzI3MjUxNzkxMw==&mid=2247485984&idx=2&sn=8fabf1a3f7eb6b59062f28e343d2f65c" target="_blank">ClickHouse到底是什么？凭啥这么牛逼！</a>
+> <a href="http://mp.weixin.qq.com/s?__biz=MzI3MjUxNzkxMw==&mid=2247485984&idx=2&sn=8fabf1a3f7eb6b59062f28e343d2f65c" target="_blank">ClickHouse到底是什么？凭啥这么牛逼！</a>
 
 
 
 
-<a href="https://blog.csdn.net/baichoufei90/article/details/84328666" target="_blank">MPP架构</a>
+> <a href="https://blog.csdn.net/baichoufei90/article/details/84328666" target="_blank">MPP架构</a>
 
 ----
 #算法
 ##一致性hash
-<a href="https://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247492221&idx=2&sn=c4ed5cb2d72518bcd89b80f313b4524e" target="_blank">图解一致性哈希算法，全网（小区局域网）最通俗易懂</a>
+> <a href="https://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247492221&idx=2&sn=c4ed5cb2d72518bcd89b80f313b4524e" target="_blank">图解一致性哈希算法，全网（小区局域网）最通俗易懂</a>
 
-<a href="https://mp.weixin.qq.com/s?__biz=MzI2NjA3NTc4Ng==&mid=2652082269&idx=2&sn=51f9e1ad67e4a27a2d56ed29d2166100" target="_blank">漫画：什么是 “哈夫曼树” ？</a>
+> <a href="https://mp.weixin.qq.com/s?__biz=MzI2NjA3NTc4Ng==&mid=2652082269&idx=2&sn=51f9e1ad67e4a27a2d56ed29d2166100" target="_blank">漫画：什么是 “哈夫曼树” ？</a>
 #IO
-<a href="http://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247498435&idx=1&sn=b8643bbc80110ca8971c3747b8cd7f99" target="_blank">Java 开发必备！ I/O与Netty原理精讲</a>
+> <a href="http://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247498435&idx=1&sn=b8643bbc80110ca8971c3747b8cd7f99" target="_blank">Java 开发必备！ I/O与Netty原理精讲</a>
 
-<a href="http://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&mid=2650139093&idx=3&sn=0d3c602cf4bc3119adc410af21a1a921" target="_blank">凉了！张三同学没答好「进程间通信」，被面试官挂了</a>
+> <a href="http://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&mid=2650139093&idx=3&sn=0d3c602cf4bc3119adc410af21a1a921" target="_blank">凉了！张三同学没答好「进程间通信」，被面试官挂了</a>
 
     由于每个进程的用户空间都是独立的，不能相互访问，这时就需要借助内核空间来实现进程间通信，原因很简单，每个进程都是共享一个内核空间。
     
