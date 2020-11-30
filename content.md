@@ -6,7 +6,7 @@
 
 > <a href="http://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&mid=2650139864&idx=1&sn=d78c1d113d332d98b612dc1d95913531" target="_blank">《Java开发手册》解读：大整数传输为何禁用Long类型? </a>
 - 双精度分配了8个字节，总共64位，从左至右划分是1位符号、11位指数、52位有效数字。如下图所示，以0.7为例，展示了双精度浮点数的存储方式。
-![alt text](image\微信截图_20200817140248.png "双精度浮点数的存储方式")
+![alt text](image/微信截图_20200817140248.png "双精度浮点数的存储方式")
 
   - 一问：JS的Number类型能安全表达的最大整型数值是多少？为什么（注意要求更严，是安全表达）？
   - 二问：在Long取值范围内，2的指数次整数转换为JS的Number类型，不会有精度丢失，但能放心使用么？
@@ -43,6 +43,11 @@
 - 我们使用synchronized加锁时，只允许一个线程进入synchronized保护的代码块，也就是临界区。如果一个线程进入了临界区，则其他的线程会进入阻塞队列里等待，这个阻塞队列和synchronized互斥锁是一对一的关系，也就是说，一把互斥锁对应着一个独立的阻塞队列。
   
   在并发编程中，如果一个线程获得了synchronized互斥锁，但是不满足继续向下执行的条件，则需要进入等待状态。此时，可以使用Java中的wait()方法来实现。当调用wait()方法后，当前线程就会被阻塞，并且会进入一个等待队列中进行等待，这个由于调用wait()方法而进入的等待队列也是互斥锁的等待队列。而且，线程在进入等待队列的同时，会释放自身获得的互斥锁，这样，其他线程就有机会获得互斥锁，进而进入临界区了。整个过程可以表示成下图所示。
+
+###锁
+
+> <a href="https://www.cnblogs.com/cxiaocai/p/12189848.html" target="_blank">java架构之路（多线程）synchronized详解以及锁的膨胀升级过程</a>
+![alt text](image/1506597-20200113215936916-1466585772.png "锁的分类")
 
 
 ##JVM
@@ -89,7 +94,7 @@
     对象的构造函数执行结束先于 finalize() 方法。
 
 ## trim移除的空白字符指的是指ASCII值小于或等于32的任何字符(' U+0020 ')：
-![alt text](image\微信图片_20201008165746.jpg "双精度浮点数的存储方式")
+![Alt text](image/微信图片_20201008165746.jpg "双精度浮点数的存储方式")
 
 ----
 #SPRING
@@ -139,8 +144,8 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 
 > <a href="https://blog.csdn.net/mindfloating/article/details/39474123" target="_blank">深入浅出 RPC - 深入篇</a>
 
-![alt text](image\dubbo-extension.jpg "dubbo-extension")
-![alt text](image\dubboFrameWork.png "dubboFrameWork")
+![alt text](image/dubbo-extension.jpg "dubbo-extension")
+![alt text](image/dubboFrameWork.png "dubboFrameWork")
 > <a href="http://mp.weixin.qq.com/s?__biz=MzUxNDA1NDI3OA==&mid=2247485488&idx=1&sn=1c47b24be47c0119689f9150255ff0a4" target="_blank">基于 Netty 手写 RPC</a>
 
 
@@ -271,7 +276,7 @@ Redis为了实现近似LRU算法，给每个key增加了一个额外增加了一
 
 
 > <a href="http://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247491906&idx=2&sn=a54e6fbde09a7a64397409f7f9f945ad" target="_blank">走进spring事务</a>
-![alt text](image\MVCC.jpg "MVCC")
+![alt text](image/MVCC.jpg "MVCC")
 
 ###索引
 > <a href="http://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247492581&idx=2&sn=3c162c7fabb046190ee0f23ca391e135" target="_blank">微信大牛教你深入了解数据库索引</a>
