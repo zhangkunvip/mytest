@@ -96,6 +96,14 @@
 ## trim移除的空白字符指的是指ASCII值小于或等于32的任何字符(' U+0020 ')：
 ![Alt text](image/微信图片_20201008165746.jpg "双精度浮点数的存储方式")
 
+> <a href="https://blog.csdn.net/wslwno1/article/details/109211366" target="_blank">String长度有限制吗？是多少？</a>
+
+>答：首先字符串的内容是由一个字符数组 char[] 来存储的，由于数组的长度及索引是整数，且String类中返回字符串长度的方法length() 的返回值也是int ，所以通过查看java源码中的类Integer我们可以看到Integer的最大范围是2^31 -1,由于数组是从0开始的，所以数组的最大长度可以使【0~2^31】通过计算是大概4GB。
+但是通过翻阅java虚拟机手册对class文件格式的定义以及常量池中对String类型的结构体定义我们可以知道对于索引定义了u2，就是无符号占2个字节，2个字节可以表示的最大范围是2^16 -1 = 65535。
+其实是65535，但是由于JVM需要1个字节表示结束指令，所以这个范围就为65534了。超出这个范围在编译时期是会报错的，但是运行时拼接或者赋值的话范围是在整形的最大范围。
+
+
+
 ----
 #SPRING
 ##spring基础
@@ -127,6 +135,10 @@
         
 ##spring-boot
 > <a href="https://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247491617&idx=1&sn=160680769e5e0a8c8200d252527f8bdc" target="_blank">最棒 Spring Boot 干货总结 ！</a>
+>
+> <a href="https://mp.weixin.qq.com/s/QI794IRoITy_q5JgkV1Jrw" target="_blank">SpringBoot 处理异常的几种常见姿势</a>
+>
+> <a href="https://mp.weixin.qq.com/s/61x28xkeB8uyYxtBA0_QsQ" target="_blank">项目实践：SpringBoot三招组合拳，手把手教你打出优雅的后端接口</a>
 
 IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 - 一、抛砖引玉：探索Spring IoC容器
