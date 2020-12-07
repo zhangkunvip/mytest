@@ -149,6 +149,8 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 - 六、启动引导：Spring Boot应用启动的秘密
 
 > <a href="http://mp.weixin.qq.com/s?__biz=Mzg3MjA4MTExMw==&mid=2247493155&idx=2&sn=0f94719e6ed2dc88e15afbc8001344f2" target="_blank">Spring Cloud Feign 自定义配置(重试、拦截与错误码处理) 实践</a>
+> 
+> <a href="https://www.cnblogs.com/cjsblog/p/9712457.html" target="_blank">SpringBoot+MyBatis+MySQL读写分离</a>
 
 ----
 #RPC
@@ -445,6 +447,10 @@ MQ-client生成inner-msg-id，保证上半场幂等。
 - 5 批处理
 - 6 数据压缩
 ###消息的【确认机制】
+> <a href="https://mp.weixin.qq.com/s/5HLRalpmvUdHxEtniZ5gLA" target="_blank">面试官问：Kafka 会不会丢消息？怎么处理的? </a>
+- 1 broker **
+- 2 producer
+- 3 consumer
 
        默认值是0。在面试中常被问到。
        producer有个ack参数，有三个值，分别代表：
@@ -510,13 +516,13 @@ MQ-client生成inner-msg-id，保证上半场幂等。
 
 ----
 ####版本管理 git/svn
-####Mysql  sql执行计划
-####Java基础  异常/error，多线程安全
-####Spring熟悉程度  注解/spring事务传播机制
-####Redis熟悉程度   数据类型，分布式锁。跳表原理等（面试效果好的，可以继续问一下）
-####Mq熟悉程度  可选： 为什么使用mq，是否使用过。是否有顺序？
-####Es熟悉程度   可选： 使用方法，
-####RPC调用熟悉程度   服务注册、发现原理。调用时是否通过注册中心。Rpc调用过程描述（面试效果好的，可以继续问一下）
+####Mysql  sql执行计划
+####Java基础  异常/error，多线程安全
+####Spring熟悉程度  注解/spring事务传播机制
+####Redis熟悉程度   数据类型，分布式锁。跳表原理等（面试效果好的，可以继续问一下）
+####Mq熟悉程度  可选： 为什么使用mq，是否使用过。是否有顺序？
+####Es熟悉程度   可选： 使用方法，
+####RPC调用熟悉程度   服务注册、发现原理。调用时是否通过注册中心。Rpc调用过程描述（面试效果好的，可以继续问一下）
 ####整体感觉
 
 
@@ -530,6 +536,7 @@ MQ-client生成inner-msg-id，保证上半场幂等。
 - <a href="http://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247499652&idx=1&sn=f8ce3697f4c3ea1573fabe456535885d" target="_blank">源码解析：Git的第一个提交是什么样的？</a>
 - <a href="http://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247499892&idx=1&sn=0513bd832d82f213ffd01f3a071566e6" target="_blank">如何写好单元测试？</a>
 - <a href="https://blog.csdn.net/lc130628/article/details/82114220" target="_blank">大B和小b的区别及关联</a>
+- <a href="https://mp.weixin.qq.com/s/FbDT7bZM0gqvL_80TIoS-g" target="_blank">这些最常用的Linux命令，每一条都应该会，没有借口！</a>
 #### 设计原则（S.O.L.I.D）：
 - 1、SRP 单一职责原则
 - 2、OCP 开闭原则
