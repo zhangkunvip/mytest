@@ -41,9 +41,30 @@
 > <a href="https://mp.weixin.qq.com/s/_OnEZ9tuDsOKBnSKmGoWKA" target="_blank">【高并发】面试官：讲讲高并发场景下如何优化加锁方式？</a>
 > 通俗的说，通过synchronized加锁的对象，通过wait方法进入队列，notify进行出队，notifyall全部出队。
 - 我们使用synchronized加锁时，只允许一个线程进入synchronized保护的代码块，也就是临界区。如果一个线程进入了临界区，则其他的线程会进入阻塞队列里等待，这个阻塞队列和synchronized互斥锁是一对一的关系，也就是说，一把互斥锁对应着一个独立的阻塞队列。
-  
-  在并发编程中，如果一个线程获得了synchronized互斥锁，但是不满足继续向下执行的条件，则需要进入等待状态。此时，可以使用Java中的wait()方法来实现。当调用wait()方法后，当前线程就会被阻塞，并且会进入一个等待队列中进行等待，这个由于调用wait()方法而进入的等待队列也是互斥锁的等待队列。而且，线程在进入等待队列的同时，会释放自身获得的互斥锁，这样，其他线程就有机会获得互斥锁，进而进入临界区了。整个过程可以表示成下图所示。
+- 在并发编程中，如果一个线程获得了synchronized互斥锁，但是不满足继续向下执行的条件，则需要进入等待状态。此时，可以使用Java中的wait()方法来实现。当调用wait()方法后，当前线程就会被阻塞，并且会进入一个等待队列中进行等待，这个由于调用wait()方法而进入的等待队列也是互斥锁的等待队列。而且，线程在进入等待队列的同时，会释放自身获得的互斥锁，这样，其他线程就有机会获得互斥锁，进而进入临界区了。整个过程可以表示成下图所示。
 
+> <a href="https://mp.weixin.qq.com/s/HAGYzsiWwB7DQ-LT1Q2pZg" target="_blank">阿里为什么推荐使用LongAdder，而不是volatile？</a>
+> 为什么会出现上面的情况？这是因为 AtomicInteger 在高并发环境下会有多个线程去竞争一个原子变量，而始终只有一个线程能竞争成功，而其他线程会一直通过 CAS 自旋尝试获取此原子变量，因此会有一定的性能消耗；而 LongAdder 会将这个原子变量分离成一个 Cell 数组，每个线程通过 Hash 获取到自己数组，这样就减少了乐观锁的重试次数，从而在高竞争下获得优势；而在低竞争下表现的又不是很好，可能是因为自己本身机制的执行时间大于了锁竞争的自旋时间，因此在低竞争下表现性能不如 AtomicInteger。
+
+###JUC
+> <a href="https://mp.weixin.qq.com/s/ydZLcf7eY3FE15uvsqfGjA" target="_blank">JUC并发编程之Semaphore信号量、CountDownLatch、CyclicBarrier栅栏、Executo...</a>
+- CountDownLaunch
+  只使用一次，设置CountDownLatch countDownLatch = new CountDownLatch(3);
+  同时设置countDownLatch.await();
+  线程用到3时countDownLatch.countDown();
+  从await位置继续执行
+- CyclicBarrier
+  多次循环使用，类似于CountDownLaunch
+  创建， CyclicBarrier cyclicBarrier = new CyclicBarrier(11)
+  使用cyclicBarrier.await();对数量进行占用
+- Semaphore
+  设置信号量大小Semaphore semaphore = new Semaphore(2);
+  多个线程进去只能最多2个获取到信号进行执行
+  semaphore.acquire();
+  semaphore.release();
+- Exchanger
+  基于线程的数据交换，交换进去的数据保存在一个管道中，消费的时候按照顺序获取
+  
 ###锁
 
 > <a href="https://www.cnblogs.com/cxiaocai/p/12189848.html" target="_blank">java架构之路（多线程）synchronized详解以及锁的膨胀升级过程</a>
@@ -149,7 +170,9 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 - 六、启动引导：Spring Boot应用启动的秘密
 
 > <a href="http://mp.weixin.qq.com/s?__biz=Mzg3MjA4MTExMw==&mid=2247493155&idx=2&sn=0f94719e6ed2dc88e15afbc8001344f2" target="_blank">Spring Cloud Feign 自定义配置(重试、拦截与错误码处理) 实践</a>
-> 
+>
+> <a href="https://blog.csdn.net/qq_29519041/article/details/103654564" target="_blank">SpringCloud Zuul 网关搭建及配置</a>
+>
 > <a href="https://www.cnblogs.com/cjsblog/p/9712457.html" target="_blank">SpringBoot+MyBatis+MySQL读写分离</a>
 
 ----
