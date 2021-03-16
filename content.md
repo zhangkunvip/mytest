@@ -84,21 +84,22 @@
 - 有序性；
 - 可见性；
 - 指令重排：CPU 指令重排、编译器优化重排；
-    - 一条汇编指令的执行是可以分为很多步骤得，分为不同的硬件执行：
-        - 取指 IF；
-        - 译码和取寄存器操作数 ID；
-        - 执行或者有效地址计算 EX（ALU 逻辑计算单元）；
-        - 存储器访问 MEM；
-        - 写回 WB（寄存器）。
+- 一条汇编指令的执行是可以分为很多步骤得，分为不同的硬件执行：
+- 取指 IF；
+- 译码和取寄存器操作数 ID；
+- 执行或者有效地址计算 EX（ALU 逻辑计算单元）；
+- 存储器访问 MEM；
+- 写回 WB（寄存器）。
 - Happen-Before 规则。
 
 > 如果光靠 sychronized 和 volatile 来保证程序执行过程中的原子性、有序性、可见性，那么代码将会变得异常繁琐。JMM 提供了 Happen-Before 规则来约束数据之间是否存在竞争，线程环境是否安全。具体如下：
 
 - 顺序原则
 
-  一个线程内保证语义的串行性：a = 1; b = a + 1;
+一个线程内保证语义的串行性：a = 1; b = a + 1;
 
 - volatile 规则
+> <a href="https://mp.weixin.qq.com/s/tuzfPEdPOBKeMXGniDus6A" target="_blank">26张图带你彻底搞懂volatile关键字</a>
 
   volatile 变量的写先发生于读，从而保证了 volatile 变量的可见性。
 
@@ -272,7 +273,8 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 
 ## mysql
 
-> <a href="https://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247491492&idx=1&sn=27cdbf23efe2b1b6314e208ccb2b0b17" target="_blank">47 张图带你 MySQL 进阶</a>
+> <a href="https://mp.weixin.qq.com/s/weXkuOjbGQpebdnxuxhXPg" target="_blank">47 张图带你 MySQL 进阶</a>
+> <a href="https://mp.weixin.qq.com/s/yeIDU2m5EnC3AJNo-bKalQ" target="_blank">炸裂！MySQL 82 张图带你飞！</a>
 
 ### 主从
 
@@ -658,6 +660,19 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
   如何写好单元测试？</a>
 - <a href="https://blog.csdn.net/lc130628/article/details/82114220" target="_blank">大B和小b的区别及关联</a>
 - <a href="https://mp.weixin.qq.com/s/FbDT7bZM0gqvL_80TIoS-g" target="_blank">这些最常用的Linux命令，每一条都应该会，没有借口！</a>
+- <a href="https://albenw.github.io/posts/854fc091/" target="_blank">Java日志体系总结</a>
+- <a href="https://mp.weixin.qq.com/s/R6G0ph6qmyQUucgw7-irBw" target="_blank">《我想进大厂》之Zookeeper夺命连环9问</a>
+- <a href="https://zhuanlan.zhihu.com/p/145551967" target="_blank">我终于看懂了HBase，太不容易了</a>;
+  - HBase是一个NoSQL数据库，一般我们用它来存储海量的数据（因为它基于HDFS分布式文件系统上构建的）
+  - HBase的一行记录由一个RowKey和一个或多个的列以及它的值所组成。先有列族后有列，列可以随意添加。
+  - HBase的增删改记录都有「版本」，默认以时间戳的方式实现。
+  - RowKey的设计如果没有特殊的业务性，最好设计为散列的，这样避免热点数据分布在同一个HRegionServer中。
+  - HBase的读写都经过Zookeeper去拉取meta数据，定位到对应的HRegion，然后找到HRegionServer
+- <a href="https://mp.weixin.qq.com/s/WH3C63-5dvwQ3WsA8zcjAQ" target="_blank">BIO、NIO、AIO、多路复用IO的区别(图解)</a>
+  - ①同步阻塞IO（Blocking IO）：即传统的IO模型。
+  - ②同步非阻塞IO（Non-blocking IO）：默认创建的socket都是阻塞的，非阻塞IO要求socket被设置为NONBLOCK。注意这里所说的NIO并非Java的NIO（New IO）库。
+  - ③多路复用IO（IO Multiplexing）：即经典的Reactor设计模式，有时也称为异步阻塞IO，Java中的Selector和Linux中的epoll都是这种模型（Redis单线程为什么速度还那么快，就是因为用了多路复用IO和缓存操作的原因）
+  - ④异步IO（Asynchronous IO）：即经典的Proactor设计模式，也称为异步非阻塞IO。
 
 #### 设计原则（S.O.L.I.D）：
 
