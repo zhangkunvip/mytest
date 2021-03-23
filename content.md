@@ -58,6 +58,8 @@
 
 ### JUC
 
+> <a href="https://baijiahao.baidu.com/s?id=1666548481761194849&wfr=spider&for=pc" target="_blank">LockSupport：一个很灵活的线程工具类</a>
+
 > <a href="https://mp.weixin.qq.com/s/ydZLcf7eY3FE15uvsqfGjA" target="_blank">JUC并发编程之Semaphore信号量、CountDownLatch、CyclicBarrier栅栏、Executo...</a>
 
 - CountDownLaunch 只使用一次，设置CountDownLatch countDownLatch = new CountDownLatch(3); 同时设置countDownLatch.await();
@@ -592,6 +594,12 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 
 > <a href="https://mp.weixin.qq.com/s?__biz=MzI2NjA3NTc4Ng==&mid=2652082269&idx=2&sn=51f9e1ad67e4a27a2d56ed29d2166100" target="_blank">漫画：什么是 “哈夫曼树” ？</a>
 
+> <a href="https://mp.weixin.qq.com/s/t8HxUTxzyHNNBJ22rnCh-g" target="_blank">字符串匹配算法详解</a>
+  - BF(brute force)【从左到右，使用被比较字符串从左到右逐一匹配】
+  - BM()【从左到右，使用被比较字符串从右到左，匹配上单词后会以单子右移】
+  - CMP()【从左到右，使用被比较字符串从左到右匹配，匹配后会缓存】
+
+
 # IO
 
 > <a href="http://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247498435&idx=1&sn=b8643bbc80110ca8971c3747b8cd7f99" target="_blank">Java 开发必备！ I/O与Netty原理精讲</a>
@@ -673,6 +681,9 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
   - ②同步非阻塞IO（Non-blocking IO）：默认创建的socket都是阻塞的，非阻塞IO要求socket被设置为NONBLOCK。注意这里所说的NIO并非Java的NIO（New IO）库。
   - ③多路复用IO（IO Multiplexing）：即经典的Reactor设计模式，有时也称为异步阻塞IO，Java中的Selector和Linux中的epoll都是这种模型（Redis单线程为什么速度还那么快，就是因为用了多路复用IO和缓存操作的原因）
   - ④异步IO（Asynchronous IO）：即经典的Proactor设计模式，也称为异步非阻塞IO。
+- <a href="https://mp.weixin.qq.com/s/RvU03iD1ZMdZ8356kbdL0g" target="_blank">一次线上JVM Young GC调优，搞懂了这么多东西！</a>
+  - 增加s0,s1大小，会同步增加ygc的时间，比如原来为500ms，s0为500m，扩大s0为2倍为1G后，ygc的时间也同时增加到1000ms。
+- <a href="https://books.halfrost.com/leetcode/" target="_blank">leetCode Cookbook</a>
 
 #### 设计原则（S.O.L.I.D）：
 

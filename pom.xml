@@ -8,6 +8,12 @@
     <artifactId>mytest</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
     <modules>
         <module>boot-base</module>
         <module>zaxiang</module>
