@@ -3,6 +3,10 @@
 ##
 
 > <a href="https://blog.csdn.net/qq_44377709/article/details/105993577" target="_blank">无锁、偏向锁、轻量级锁、重量级锁，完整的锁升级！</a>
+> 
+    -偏向锁是指一段同步代码一直被一个线程所访问，那么该线程会自动获取锁。降低获取锁的代价。
+    -轻量级锁是指当锁是偏向锁的时候，被另一个线程所访问，偏向锁就会升级为轻量级锁，其他线程会通过自旋的形式尝试获取锁，不会阻塞，提高性能。 
+    -重量级锁是指当锁为轻量级锁的时候，另一个线程虽然是自旋，但自旋不会一直持续下去，当自旋一定次数的时候，还没有获取到锁，就会进入阻塞，该锁膨胀为重量级锁。重量级锁会让其他申请的线程进入阻塞，性能降低。 
 
 > <a href="http://mp.weixin.qq.com/s?__biz=MzIxNjA5MTM2MA==&mid=2652435146&idx=2&sn=fd72622e7152f0b7d0c9d91290b3aac6" target="_blank">Java7/8 中的HashMap 和 ConcurrentHashMap</a>
 
@@ -15,6 +19,15 @@
     - 二问：在Long取值范围内，2的指数次整数转换为JS的Number类型，不会有精度丢失，但能放心使用么？
     - 三问：我们一般都知道十进制数转二进制浮点数有可能会出现精度丢失，但精度丢失具体怎么发生的？
     - 四问：如果不幸中招，服务端正在使用Long类型作为大整数的返回，有哪些办法解决？
+
+## 树
+
+> <a href="https://mp.weixin.qq.com/s/yHWEl-d-Hl7A_O6N4GCAPg" target="_blank">25 张图演示红黑树 </a>
+
+    - 二叉树
+    - AVL树（平衡二叉树）
+    - B树（每个节点上有多个值）
+    - 红黑树（首位为黑，从任意节点到叶子节点上黑色相同，红黑相间），特点：左旋、右旋
 
 ## 多线程
 
@@ -48,7 +61,9 @@
 > 通俗的说，通过synchronized加锁的对象，通过wait方法进入队列，notify进行出队，notifyall全部出队。
 
 -
+
 我们使用synchronized加锁时，只允许一个线程进入synchronized保护的代码块，也就是临界区。如果一个线程进入了临界区，则其他的线程会进入阻塞队列里等待，这个阻塞队列和synchronized互斥锁是一对一的关系，也就是说，一把互斥锁对应着一个独立的阻塞队列。
+
 - 在并发编程中，如果一个线程获得了synchronized互斥锁，但是不满足继续向下执行的条件，则需要进入等待状态。此时，可以使用Java中的wait()方法来实现。当调用wait()
   方法后，当前线程就会被阻塞，并且会进入一个等待队列中进行等待，这个由于调用wait()
   方法而进入的等待队列也是互斥锁的等待队列。而且，线程在进入等待队列的同时，会释放自身获得的互斥锁，这样，其他线程就有机会获得互斥锁，进而进入临界区了。整个过程可以表示成下图所示。
@@ -63,8 +78,10 @@
 > <a href="https://mp.weixin.qq.com/s/ydZLcf7eY3FE15uvsqfGjA" target="_blank">JUC并发编程之Semaphore信号量、CountDownLatch、CyclicBarrier栅栏、Executo...</a>
 
 - CountDownLaunch 只使用一次，设置CountDownLatch countDownLatch = new CountDownLatch(3); 同时设置countDownLatch.await();
-线程用到3时countDownLatch.countDown(); 从await位置继续执行
+  线程用到3时countDownLatch.countDown(); 从await位置继续执行
+
 > <a href="https://mp.weixin.qq.com/s/m60Tq18Vbp5ml-qAp505VQ" target="_blank">一文搞懂 CountDownLatch 用法和源码！</a>
+
 - CyclicBarrier 多次循环使用，类似于CountDownLaunch 创建， CyclicBarrier cyclicBarrier = new CyclicBarrier(11)
   使用cyclicBarrier.await();对数量进行占用
 - Semaphore 设置信号量大小Semaphore semaphore = new Semaphore(2); 多个线程进去只能最多2个获取到信号进行执行 semaphore.acquire();
@@ -101,9 +118,10 @@
 一个线程内保证语义的串行性：a = 1; b = a + 1;
 
 - volatile 规则
+
 > <a href="https://mp.weixin.qq.com/s/tuzfPEdPOBKeMXGniDus6A" target="_blank">26张图带你彻底搞懂volatile关键字</a>
 
-  volatile 变量的写先发生于读，从而保证了 volatile 变量的可见性。
+volatile 变量的写先发生于读，从而保证了 volatile 变量的可见性。
 
 - 锁规则
 
@@ -136,6 +154,7 @@
 ----
 
 # SPRING
+
 ![alt text](image/b8324b093108e320693eb995b7e11a7f.jpg "dubbo-extension")
 
 ## spring基础
@@ -164,7 +183,11 @@
 > <a href="https://mp.weixin.qq.com/s/VUQ4HOqoZ78l0V4u5MTvSA" target="_blank">写了个牛逼的日志切面，甩锅更方便了！</a>
 
 - 4、Spring的IoC理解：
-    - Spring的IOC有三种注入方式 ：构造器注入、setter方法注入、根据注解注入。
+- Spring的IOC有三种注入方式 ：构造器注入、setter方法注入、根据注解注入。
+
+> <a href="https://mp.weixin.qq.com/s/jttHRgG0ZE2P9h_IWTtvZw" target="_blank">面试必问：Spring 循环依赖的三种方式 ！</a>
+
+
 
 ## spring-boot
 
@@ -188,6 +211,8 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 > <a href="https://blog.csdn.net/qq_29519041/article/details/103654564" target="_blank">SpringCloud Zuul 网关搭建及配置</a>
 >
 > <a href="https://www.cnblogs.com/cjsblog/p/9712457.html" target="_blank">SpringBoot+MyBatis+MySQL读写分离</a>
+
+![alt text](image/20200809103713108.png "cloud客户端调用")
 
 ----
 
@@ -359,6 +384,13 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 > <a href="http://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247491906&idx=2&sn=a54e6fbde09a7a64397409f7f9f945ad" target="_blank">走进spring事务</a>
 ![alt text](image/MVCC.jpg "MVCC")
 
+> <a href="https://mp.weixin.qq.com/s/Fb9sHAVeVQp-4rWjx3oOCg" target="_blank">事务注解 @Transactional 失效的3种场景及解决办法</a>
+- 第一种 Transactional注解标注方法修饰符为非public时，@Transactional注解将会不起作用
+
+- 在类内部调用调用类内部@Transactional标注的方法。这种情况下也会导致事务不开启。
+
+- 事务方法内部捕捉了异常，没有抛出新的异常，导致事务操作不会进行回滚。
+
 ### 索引
 
 > <a href="http://mp.weixin.qq.com/s?__biz=MzU2NDg0OTgyMA==&mid=2247492581&idx=2&sn=3c162c7fabb046190ee0f23ca391e135" target="_blank">微信大牛教你深入了解数据库索引</a>
@@ -404,6 +436,8 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 
 > <a href="https://www.jianshu.com/p/8e22558dc8a1" target="_blank">Elasticsearch详解-续</a>
 
+> <a href="https://mp.weixin.qq.com/s/CxIb7SARtoBQX7Yml5Dpxg" target="_blank">ElasticSearch 面试 4 连问，你顶得住么？</a>
+
 
 ----
 
@@ -437,11 +471,11 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
         延长消息留存时间，包括过去消息重放的可能；
         传统解决方案无法满足的高伸缩能力。
 -
-      当开发复杂的软件系统时，我们可能被诱导使用同一个消息平台去实现所有必须的消息用例。但是，从我的经验看，通常同时使用这两个消息平台能够带来更多的好处。
-      例如，在一个事件驱动的架构系统中，我们可以使用RabbitMQ在服务之间发送命令，并且使用Kafka实现业务事件通知。
-      原因是事件通知常常用于事件溯源，批量操作（ETL风格），或者审计目的，因此Kafka的消息留存能力就显得很有价值。
-      相反，命令一般需要在消费者端做额外处理，并且处理可以失败，所以需要高级的容错处理能力。
-      这里，RabbitMQ在功能上有很多闪光点。以后我可能会写一篇详细的文章来介绍，但是你必须记住--你的里程（mileage）可能会变化，因为适合性取决于你的特定需求。
+    当开发复杂的软件系统时，我们可能被诱导使用同一个消息平台去实现所有必须的消息用例。但是，从我的经验看，通常同时使用这两个消息平台能够带来更多的好处。
+    例如，在一个事件驱动的架构系统中，我们可以使用RabbitMQ在服务之间发送命令，并且使用Kafka实现业务事件通知。
+    原因是事件通知常常用于事件溯源，批量操作（ETL风格），或者审计目的，因此Kafka的消息留存能力就显得很有价值。
+    相反，命令一般需要在消费者端做额外处理，并且处理可以失败，所以需要高级的容错处理能力。
+    这里，RabbitMQ在功能上有很多闪光点。以后我可能会写一篇详细的文章来介绍，但是你必须记住--你的里程（mileage）可能会变化，因为适合性取决于你的特定需求。
 
 ### RabbitMQ之交换机的四种类型和属性
 
@@ -510,11 +544,15 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 ## kafka
 
 > <a href="http://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&mid=2650138701&idx=3&sn=181b58773b36a50ec313e00b8624c07a" target="_blank">Kafka 为什么能那么快的 6 个原因</a>
+> <a href="https://mp.weixin.qq.com/s/9i4lDtWqOrzJbzN1I1yAwg" target="_blank">Kafka性能篇：为何Kafka这么"快"？</a>
 
 - 1 利用 Partition 实现并行处理
 - 2 顺序写磁盘
 - 3 充分利用 Page Cache
 - 4 零拷贝技术
+
+ <a href="https://mp.weixin.qq.com/s/lYDfWMxZY4uLO99G2unK8Q" target="_blank">什么是mmap？</a>
+
 
         4.1 网络数据持久化到磁盘 (Producer 到 Broker)
         传统模式下，数据从网络传输到文件需要 4 次数据拷贝、4 次上下文切换和两次系统调用。
@@ -530,20 +568,19 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
         然后应用程序将内核态 Buffer 数据读入用户态（CPU copy）
         接着用户程序将用户态 Buffer 再拷贝到内核态（CPU copy）
         最后通过 DMA copy 将数据拷贝到磁盘文件
-
--
-      4.2 磁盘文件通过网络发送（Broker 到 Consumer）
-      传统方式实现：先读取磁盘、再用 socket 发送，实际也是进过四次 copy
-      
-      buffer = File.read 
-      Socket.send(buffer)
-      
-      这一过程可以类比上边的生产消息：
-      
-      首先通过系统调用将文件数据读入到内核态 Buffer（DMA 拷贝）
-      然后应用程序将内存态 Buffer 数据读入到用户态 Buffer（CPU 拷贝）
-      接着用户程序通过 Socket 发送数据时将用户态 Buffer 数据拷贝到内核态 Buffer（CPU 拷贝）
-      最后通过 DMA 拷贝将数据拷贝到 NIC Buffer
+  
+        4.2 磁盘文件通过网络发送（Broker 到 Consumer）
+        传统方式实现：先读取磁盘、再用 socket 发送，实际也是进过四次 copy
+        
+        buffer = File.read 
+        Socket.send(buffer)
+        
+        这一过程可以类比上边的生产消息：
+        
+        首先通过系统调用将文件数据读入到内核态 Buffer（DMA 拷贝）
+        然后应用程序将内存态 Buffer 数据读入到用户态 Buffer（CPU 拷贝）
+        接着用户程序通过 Socket 发送数据时将用户态 Buffer 数据拷贝到内核态 Buffer（CPU 拷贝）
+        最后通过 DMA 拷贝将数据拷贝到 NIC Buffer
 - 5 批处理
 - 6 数据压缩
 
@@ -595,10 +632,10 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 > <a href="https://mp.weixin.qq.com/s?__biz=MzI2NjA3NTc4Ng==&mid=2652082269&idx=2&sn=51f9e1ad67e4a27a2d56ed29d2166100" target="_blank">漫画：什么是 “哈夫曼树” ？</a>
 
 > <a href="https://mp.weixin.qq.com/s/t8HxUTxzyHNNBJ22rnCh-g" target="_blank">字符串匹配算法详解</a>
-  - BF(brute force)【从左到右，使用被比较字符串从左到右逐一匹配】
-  - BM()【从左到右，使用被比较字符串从右到左，匹配上单词后会以单子右移】
-  - CMP()【从左到右，使用被比较字符串从左到右匹配，匹配后会缓存】
 
+- BF(brute force)【从左到右，使用被比较字符串从左到右逐一匹配】
+- BM()【从左到右，使用被比较字符串从右到左，匹配上单词后会以单子右移】
+- CMP()【从左到右，使用被比较字符串从左到右匹配，匹配后会缓存】
 
 # IO
 
@@ -671,18 +708,19 @@ IOC容器、JavaConfig、事件监听、SpringFactoriesLoader详解
 - <a href="https://albenw.github.io/posts/854fc091/" target="_blank">Java日志体系总结</a>
 - <a href="https://mp.weixin.qq.com/s/R6G0ph6qmyQUucgw7-irBw" target="_blank">《我想进大厂》之Zookeeper夺命连环9问</a>
 - <a href="https://zhuanlan.zhihu.com/p/145551967" target="_blank">我终于看懂了HBase，太不容易了</a>;
-  - HBase是一个NoSQL数据库，一般我们用它来存储海量的数据（因为它基于HDFS分布式文件系统上构建的）
-  - HBase的一行记录由一个RowKey和一个或多个的列以及它的值所组成。先有列族后有列，列可以随意添加。
-  - HBase的增删改记录都有「版本」，默认以时间戳的方式实现。
-  - RowKey的设计如果没有特殊的业务性，最好设计为散列的，这样避免热点数据分布在同一个HRegionServer中。
-  - HBase的读写都经过Zookeeper去拉取meta数据，定位到对应的HRegion，然后找到HRegionServer
+    - HBase是一个NoSQL数据库，一般我们用它来存储海量的数据（因为它基于HDFS分布式文件系统上构建的）
+    - HBase的一行记录由一个RowKey和一个或多个的列以及它的值所组成。先有列族后有列，列可以随意添加。
+    - HBase的增删改记录都有「版本」，默认以时间戳的方式实现。
+    - RowKey的设计如果没有特殊的业务性，最好设计为散列的，这样避免热点数据分布在同一个HRegionServer中。
+    - HBase的读写都经过Zookeeper去拉取meta数据，定位到对应的HRegion，然后找到HRegionServer
 - <a href="https://mp.weixin.qq.com/s/WH3C63-5dvwQ3WsA8zcjAQ" target="_blank">BIO、NIO、AIO、多路复用IO的区别(图解)</a>
-  - ①同步阻塞IO（Blocking IO）：即传统的IO模型。
-  - ②同步非阻塞IO（Non-blocking IO）：默认创建的socket都是阻塞的，非阻塞IO要求socket被设置为NONBLOCK。注意这里所说的NIO并非Java的NIO（New IO）库。
-  - ③多路复用IO（IO Multiplexing）：即经典的Reactor设计模式，有时也称为异步阻塞IO，Java中的Selector和Linux中的epoll都是这种模型（Redis单线程为什么速度还那么快，就是因为用了多路复用IO和缓存操作的原因）
-  - ④异步IO（Asynchronous IO）：即经典的Proactor设计模式，也称为异步非阻塞IO。
+    - ①同步阻塞IO（Blocking IO）：即传统的IO模型。
+    - ②同步非阻塞IO（Non-blocking IO）：默认创建的socket都是阻塞的，非阻塞IO要求socket被设置为NONBLOCK。注意这里所说的NIO并非Java的NIO（New IO）库。
+    - ③多路复用IO（IO
+      Multiplexing）：即经典的Reactor设计模式，有时也称为异步阻塞IO，Java中的Selector和Linux中的epoll都是这种模型（Redis单线程为什么速度还那么快，就是因为用了多路复用IO和缓存操作的原因）
+    - ④异步IO（Asynchronous IO）：即经典的Proactor设计模式，也称为异步非阻塞IO。
 - <a href="https://mp.weixin.qq.com/s/RvU03iD1ZMdZ8356kbdL0g" target="_blank">一次线上JVM Young GC调优，搞懂了这么多东西！</a>
-  - 增加s0,s1大小，会同步增加ygc的时间，比如原来为500ms，s0为500m，扩大s0为2倍为1G后，ygc的时间也同时增加到1000ms。
+    - 增加s0,s1大小，会同步增加ygc的时间，比如原来为500ms，s0为500m，扩大s0为2倍为1G后，ygc的时间也同时增加到1000ms。
 - <a href="https://books.halfrost.com/leetcode/" target="_blank">leetCode Cookbook</a>
 
 #### 设计原则（S.O.L.I.D）：
